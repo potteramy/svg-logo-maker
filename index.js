@@ -1,6 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
-const {Circle} =  require('./lib/shapes')
+const {Circle, Triangle} =  require('./lib/shapes')
 
 
 inquirer
@@ -38,6 +38,8 @@ inquirer
 
     if(data.shape === 'circle'){
       chosenShape = new Circle(data.color, data.text, data.textFill)
+    } else if(data.shape === "triangle"){
+      chosenShape = new Triangle(data.color, data.text, data.textFill)
     }
 
     fs.writeFile("./dist/logo.svg", chosenShape.render(), err => {
