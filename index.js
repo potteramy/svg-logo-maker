@@ -1,6 +1,6 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
-const {Circle, Triangle} =  require('./lib/shapes')
+const {Circle, Triangle, Square} =  require('./lib/shapes')
 
 
 inquirer
@@ -12,12 +12,12 @@ inquirer
     {
       type: "input",
       name: "textFill",
-      message: "What color would you like your text?"
+      message: "What color would you like your text? (color keyword OR a hexadecimal number)"
     },
     {
       type: "input",
       name: "color",
-      message:'What color would you like for your logo?'
+      message:'What color would you like for your logo? (color keyword OR a hexadecimal number)'
     },
     {
       type: "list",
@@ -40,6 +40,8 @@ inquirer
       chosenShape = new Circle(data.color, data.text, data.textFill)
     } else if(data.shape === "triangle"){
       chosenShape = new Triangle(data.color, data.text, data.textFill)
+    } else{
+      chosenShape = new Square(data.color, data.text, data.textFill)
     }
 
     fs.writeFile("./dist/logo.svg", chosenShape.render(), err => {
@@ -48,7 +50,6 @@ inquirer
       else {
         console.log("Generated logo.svg")
       }  
-  }
-  )
+  })
 })
 
